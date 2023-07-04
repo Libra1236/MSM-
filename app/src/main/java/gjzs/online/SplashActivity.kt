@@ -30,20 +30,6 @@ class SplashActivity : Activity() {
         super.onCreate(savedInstanceState)
 
         //签名校验
-        if (!BuildConfig.DEBUG) {
-            val signCode = String(Base64.decode("RUQ6RjE6REE6QkU6Mzc6OTA6RDM6MTY6RTg6Qzc6NTI6Qzg6OUQ6QUQ6M0U6MTM6MEE6RkM6NjE6Mzk=", Base64.DEFAULT))
-            val signCheck = SignCheck(this, signCode)
-            val webCode = String(Base64.decode("aHR0cHM6Ly9nanpzci5jb20vU2lnbkNoZWNrRmFpbGVkLmh0bWw=", Base64.DEFAULT))
-            if (!signCheck.check()) {
-                Log.e("SplashActivity", "SignCheck failed")
-                Toast.makeText(this, "警告：您安装的是非官方应用，请立即卸载，并前往 gjzsr.com 下载官方正版！", Toast.LENGTH_LONG).show()
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webCode))
-                startActivity(intent)
-                finish()
-                return
-            }
-        }
-
         if (ScriptEnvironmen.isInited()) {
             if (isTaskRoot) {
                 gotoHome()
@@ -58,7 +44,20 @@ class SplashActivity : Activity() {
     }
 
     /**
-     * 界面主题样式调整
+     *         if (!BuildConfig.DEBUG) {
+            val signCode = String(Base64.decode("RUQ6RjE6REE6QkU6Mzc6OTA6RDM6MTY6RTg6Qzc6NTI6Qzg6OUQ6QUQ6M0U6MTM6MEE6RkM6NjE6Mzk=", Base64.DEFAULT))
+            val signCheck = SignCheck(this, signCode)
+            val webCode = String(Base64.decode("aHR0cHM6Ly9nanpzci5jb20vU2lnbkNoZWNrRmFpbGVkLmh0bWw=", Base64.DEFAULT))
+            if (!signCheck.check()) {
+                Log.e("SplashActivity", "SignCheck failed")
+                Toast.makeText(this, "警告：您安装的是非官方应用，请立即卸载，并前往 gjzsr.com 下载官方正版！", Toast.LENGTH_LONG).show()
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(webCode))
+                startActivity(intent)
+                finish()
+                return
+            }
+        }
+
      */
     private fun updateThemeStyle() {
         window.navigationBarColor = getColorAccent()
